@@ -226,7 +226,7 @@ class ParticleFilterInterface:
         :param image: Canvas on which to draw
         :return:  Updated canvas
         """
-        dist = np.linalg.norm(self.particles - self.state)
+        dist = np.linalg.norm(self.particles - self.state, axis=1)
         weighted_sum = np.sum(dist * self.weights.reshape((-1, 1)))
         cv2.circle(image,
                    tuple(self.state.astype(np.int)),
