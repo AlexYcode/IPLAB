@@ -210,7 +210,8 @@ class ParticleFilterInterface:
         """
         best_idx = self.weights.argmax()
         best_state = self.state #self.particles[best_idx, :]
-        pt1 = (best_state - np.asarray(self.model.shape[1::-1]) / 2).astype(np.int)
+        pt1 = (best_state - np.asarray(self.model.shape[1::-1]) / 2).astype(int)
+        # pt1 = (best_state - np.asarray(self.model.shape[1::-1]) / 2).astype(np.int)
         #  pt1 = (self.state - np.array(self.model.shape[1::-1])/2).astype(np.int)
         pt2 = pt1 + np.asarray(self.model.shape[1::-1])
         cv2.rectangle(image,
@@ -229,7 +230,8 @@ class ParticleFilterInterface:
         dist = np.linalg.norm(self.particles - self.state)
         weighted_sum = np.sum(dist * self.weights.reshape((-1, 1)))
         cv2.circle(image,
-                   tuple(self.state.astype(np.int)),
+                   tuple(self.state.astype(int)),
+                #    tuple(self.state.astype(np.int)),
                    int(weighted_sum),
                    (255, 255, 255),
                    1,
